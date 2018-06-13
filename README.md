@@ -1,34 +1,34 @@
 # SmartPlug
 
-## Zasada dzia³ania oraz krótki opis
+## Zasada dziaÅ‚ania oraz krÃ³tki opis
 
-**SmartPlug** jest projektem zaliczeniowym na zajêcia z Podstawy Techniki Mikroprocerowej, napisanym w jêzyku C. Dodatkowo, aplikacja s³u¿¹ca do komunikacji miêdzy u¿ytkownikiem a urz¹dzeniem, zosta³a napisana w C#. SmartPlug dzia³a na prostej zasadzie:
+**SmartPlug** jest projektem zaliczeniowym na zajÄ™cia z Podstawy Techniki Mikroprocesorowej, napisanym w jÄ™zyku C. Dodatkowo, aplikacja sÅ‚uÅ¼Ä…ca do komunikacji miÄ™dzy uÅ¼ytkownikiem a urzÄ…dzeniem, zostaÅ‚a napisana w C#. SmartPlug dziaÅ‚a na prostej zasadzie:
 
-- urz¹dzenie elektroniczne (TV, lampka, suszarka, etc.) zostaje pod³¹czane do 'gniazdka',
+- urzÄ…dzenie elektroniczne (TV, lampka, suszarka, etc.) zostaje podÅ‚Ä…czane do 'gniazdka',
 
-- gniazdko 'tworzy' w³asny hotspot - otwarta sieæ **AI-THINKER_F68149**,
+- gniazdko 'tworzy' wÅ‚asny hotspot - otwarta sieÄ‡ **AI-THINKER_F68149**,
 
-- mo¿na siê do niego pod³¹czyæ za pomoc¹ interfejsu aplikacji, nale¿y równie¿ podaæ przyk³adowo Adres: 192.168.4.1 oraz nr Portu: 1234,
+- moÅ¼na siÄ™ do niego podÅ‚Ä…czyÄ‡ za pomocÄ… interfejsu aplikacji, naleÅ¼y rÃ³wnieÅ¼ podaÄ‡ przykÅ‚adowo Adres: 192.168.4.1 oraz nr Portu: 1234,
 
-- dodatkowo aplikacja umo¿liwia prze³¹czanie przekaŸników,
+- dodatkowo aplikacja umoÅ¼liwia przeÅ‚Ä…czanie przekaÅºnikÃ³w,
 
-- przekaŸniki po przekroczeniu wymaganej wartoœci, prze³¹czaj¹ siê w sposób skokowy, umo¿liwiaj¹c dop³yw pr¹du lub jego odciêcie, dziêki czemu urz¹dzenie elektroniczne mo¿e siê w³¹czyæ lub wy³¹czyæ.
+- przekaÅºniki po przekroczeniu wymaganej wartoÅ›ci, przeÅ‚Ä…czajÄ… siÄ™ w sposÃ³b skokowy, umoÅ¼liwiajÄ…c dopÅ‚yw prÄ…du lub jego odciÄ™cie, dziÄ™ki czemu urzÄ…dzenie elektroniczne moÅ¼e siÄ™ wÅ‚Ä…czyÄ‡ lub wyÅ‚Ä…czyÄ‡.
 
-## Wykorzystywane podzespo³y
+## Wykorzystywane podzespoÅ‚y
 
 1.	STM32F407G Discovery
 
 ![stm32f4](https://image.ibb.co/kWcQSy/stm32f4_discovery.jpg)
 
-2.	Modu³ Wi-Fi ESP8266-01
+2.	ModuÅ‚ Wi-Fi ESP8266-01
 
 ![esp](https://image.ibb.co/mrpVSy/HCMODU0085_800_600_New.jpg)
 
-4.	PrzekaŸnik SRD-12VDC-SL-C
+4.	PrzekaÅºnik SRD-12VDC-SL-C
 
 ![relay](https://image.ibb.co/jzYAud/relay_module_12v_1024x1024.jpg)
 
-## Sposób pod³¹czenia pinów
+## SposÃ³b podÅ‚Ä…czenia pinÃ³w
 
 |PORT GPIO - STM32|PORT - ESP8266-01          |PORT SRD-12VDC-SL-C|
 |-|-|-|
@@ -42,67 +42,67 @@
 ## Struktura projektu i opis
 
 > \.\.\SmartGniazdko\SmartGniazdkoSTMProjekt\main.c
->>	Lokalizacja pliku *main.c*, w którym zawarta jest ca³a logika projektu, realizowana na mikrokontrolerze.
+>>	Lokalizacja pliku *main.c*, w ktÃ³rym zawarta jest caÅ‚a logika projektu, realizowana na mikrokontrolerze.
 >>
 >>> int main(void);
->>>> Funkcja zawieraj¹ca pêtlê nieskoñczon¹, wywo³ywane s¹ w niej równie¿ inne procedury oraz funkcje.
+>>>> Funkcja zawierajÄ…ca pÄ™tlÄ™ nieskoÅ„czonÄ…, wywoÅ‚ywane sÄ… w niej rÃ³wnieÅ¼ inne procedury oraz funkcje.
 >>>
 >>> void UARTSettings(void);
->>>> Procedura odpowiedzialna za poprawne ustawienie USART-a 3, w naszym przypadku -  modu³u Wi-Fi ESP8266-01.
+>>>> Procedura odpowiedzialna za poprawne ustawienie USART-a 3, w naszym przypadku -  moduÅ‚u Wi-Fi ESP8266-01.
 >>>
 >>> void RelaysSettings(void);
->>>> Procedura, w której odpowiednio ustawiany jest przekaŸnik SRD-12VDC-SL-C.
+>>>> Procedura, w ktÃ³rej odpowiednio ustawiany jest przekaÅºnik SRD-12VDC-SL-C.
 >>>
 >>> void ESPInitialization(void);
->>>> Procedura, w której przy pomocy modu³u Wi-Fi ESP8266-01 w pierwszej kolejnoœci roz³¹czamy jakiekolwiek po³¹czenia z Access Pointem (komenda: **AT+CWQAP**), jeœli takie istnia³o; nastêpnie ustawiamy tryb hosta (komenda: **AT+CWMODE=2**); w dalszej kolejnoœci pozwalamy na wiele po³¹czeñ (komenda: **AT+CIPMUX=1**); na sam koniec tworzymy server i przypisujemy go do portu 1234 (komenda: **AT+CIPSERVER=1,1234**). Wiêcej komend mo¿na znaleŸæ pod linkiem: [komendy AT](https://room-15.github.io/blog/2015/03/26/esp8266-at-command-reference/).
+>>>> Procedura, w ktÃ³rej przy pomocy moduÅ‚u Wi-Fi ESP8266-01 w pierwszej kolejnoÅ›ci rozÅ‚Ä…czamy jakiekolwiek poÅ‚Ä…czenia z Access Pointem (komenda: **AT+CWQAP**), jeÅ›li takie istniaÅ‚o; nastÄ™pnie ustawiamy tryb hosta (komenda: **AT+CWMODE=2**); w dalszej kolejnoÅ›ci pozwalamy na wiele poÅ‚Ä…czeÅ„ (komenda: **AT+CIPMUX=1**); na sam koniec tworzymy server i przypisujemy go do portu 1234 (komenda: **AT+CIPSERVER=1,1234**). WiÄ™cej komend moÅ¼na znaleÅºÄ‡ pod linkiem: [komendy AT](https://room-15.github.io/blog/2015/03/26/esp8266-at-command-reference/).
 >>>
 >>> void USART3_IRQHandler(void);
->>>> Procedura odpowiedzialna za obs³ugê przerwañ USART-a 3, w której dzieje siê ca³a 'magia'; odbierane s¹ wszystkie komendy i wywo³ywana jest procedura *handleMessage*.
+>>>> Procedura odpowiedzialna za obsÅ‚ugÄ™ przerwaÅ„ USART-a 3, w ktÃ³rej dzieje siÄ™ caÅ‚a 'magia'; odbierane sÄ… wszystkie komendy i wywoÅ‚ywana jest procedura *handleMessage*.
 >>>
 >>> void handleMessage(void);
->>>> Wspomniana procedura wykorzystywana jest do poprawnego odczytywania odebranych komend, na podstawie których nastêpnie odpowiednio prze³¹czane s¹ prze³¹czniki.
+>>>> Wspomniana procedura wykorzystywana jest do poprawnego odczytywania odebranych komend, na podstawie ktÃ³rych nastÄ™pnie odpowiednio przeÅ‚Ä…czane sÄ… przeÅ‚Ä…czniki.
 >>>
 >>> void sendMessage(void);
->>>> Procedura, odpowiedzialna za wysy³anie komend do USART-a 3 - modu³u Wi-Fi.
+>>>> Procedura, odpowiedzialna za wysyÅ‚anie komend do USART-a 3 - moduÅ‚u Wi-Fi.
 >>>
 >>> void getRelay(void);
->>>> Procedura w której sprawdzany jest stan portów PD12 i PD13, zale¿nie od stanu odsy³ane s¹ ró¿ne komendy; wykorzystywana komenda: **AT+CIPSEND** z dwoma parametrami, z których pierwszy okreœla id wiadomoœci, drugi - jej d³ugoœæ, nastêpnie przy pomocy procedury *sendMessage* przesy³ana jest konkretna komenda...
+>>>> Procedura w ktÃ³rej sprawdzany jest stan portÃ³w PD12 i PD13, zaleÅ¼nie od stanu odsyÅ‚ane sÄ… rÃ³Å¼ne komendy; wykorzystywana komenda: **AT+CIPSEND** z dwoma parametrami, z ktÃ³rych pierwszy okreÅ›la id wiadomoÅ›ci, drugi - jej dÅ‚ugoÅ›Ä‡, nastÄ™pnie przy pomocy procedury *sendMessage* przesyÅ‚ana jest konkretna komenda...
 >>>
 >>> void setRelay(void);
->>>> ..., obs³ugiwana w *handleMessage*, która to wywo³uje procedurê *setRelay* odpowiedzialn¹ za w³aœciwe prze³¹czanie przekaŸników na podstawie wartoœci parametrów: *bit1* oraz *bit2*.
+>>>> ..., obsÅ‚ugiwana w *handleMessage*, ktÃ³ra to wywoÅ‚uje procedurÄ™ *setRelay* odpowiedzialnÄ… za wÅ‚aÅ›ciwe przeÅ‚Ä…czanie przekaÅºnikÃ³w na podstawie wartoÅ›ci parametrÃ³w: *bit1* oraz *bit2*.
 >>>
 >>> uint16_t strLen(char *);
->>>> Funkcja pomocnicza, zwracaj¹ca d³ugoœæ, podanego jako parametr, ³añcucha znaków.
+>>>> Funkcja pomocnicza, zwracajÄ…ca dÅ‚ugoÅ›Ä‡, podanego jako parametr, Å‚aÅ„cucha znakÃ³w.
 >>>
 >>> void Delay(void);
->>>> Procedura pomocnicza, odpowiedzialna za opóŸnienie.
+>>>> Procedura pomocnicza, odpowiedzialna za opÃ³Åºnienie.
 >
 > \.\.\SmartGniazdko\SmartGniazdkoWinFormsApp\Windows app\ESP
->> Lokalizacja plików aplikacji, poœrednicz¹cej miêdzy u¿ytkownikiem a mikrokontrolerem.
+>> Lokalizacja plikÃ³w aplikacji, poÅ›redniczÄ…cej miÄ™dzy uÅ¼ytkownikiem a mikrokontrolerem.
 >>> TCP.cs
->>>> Plik, w którym tworzony jest nowy klient.
+>>>> Plik, w ktÃ³rym tworzony jest nowy klient.
 >>>
 >>> Program.cs
->>>> Plik, w którym wywo³ywana jest sama aplikacja oraz jej **zaawansowany** interfejs graficzny.
+>>>> Plik, w ktÃ³rym wywoÅ‚ywana jest sama aplikacja oraz jej **zaawansowany** interfejs graficzny.
 >>>
 >>> MAIN_WINDOW.cs
->>>> Plik, w którym zapisana jest ca³a logika zwi¹zana z wysy³aniem wiadomoœci przez klienta na serwer.
+>>>> Plik, w ktÃ³rym zapisana jest caÅ‚a logika zwiÄ…zana z wysyÅ‚aniem wiadomoÅ›ci przez klienta na serwer.
 >>>
 >>> MAIN_WINDOW.Designer.cs
->>> Plik odpowiedzialny za ca³y wygl¹d aplikacji, wyœwietlanie placeholderów, buttonów, etc.
+>>> Plik odpowiedzialny za caÅ‚y wyglÄ…d aplikacji, wyÅ›wietlanie placeholderÃ³w, buttonÃ³w, etc.
 
-## Zdjêcia przedstawiaj¹ce efekt koñcowy
+## ZdjÄ™cia przedstawiajÄ…ce efekt koÅ„cowy
 
-1. Pod³¹czenie modu³u Wi-Fi ESP8266-01 oraz przekaŸników SRD-12VDC-SL-C z p³ytk¹ STM32F407G Discovery
+1. PodÅ‚Ä…czenie moduÅ‚u Wi-Fi ESP8266-01 oraz przekaÅºnikÃ³w SRD-12VDC-SL-C z pÅ‚ytkÄ… STM32F407G Discovery
 	
 ![final project](https://preview.ibb.co/cjGKLJ/4.jpg)
 
-2.	Wygl¹d aplikacji s³u¿¹cej do komunikacji u¿ytkownik-mikrokontroler
+2.	WyglÄ…d aplikacji sÅ‚uÅ¼Ä…cej do komunikacji uÅ¼ytkownik-mikrokontroler
 
 ![app](https://image.ibb.co/m49yfJ/35328010_1826042714119289_4439020950079406080_n.png)
 
 ## Credits
-Micha³ Miroñczuk: [mirooon](https://github.com/mirooon),
+MichaÅ‚ MiroÅ„czuk: [mirooon](https://github.com/mirooon),
 Albert Millert: [devmood](https://github.com/devmood)
 
 ---
